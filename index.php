@@ -76,9 +76,9 @@ else {
 }
 
 register_activation_hook( __FILE__, 'sqm_plugin_create_tables' );
-//register_uninstall_hook( __FILE__, 'sqm_plugin_drop_tables' );
+register_uninstall_hook( __FILE__, 'sqm_plugin_drop_tables' );
 //#! [:: DEBUG MODE ONLY]
-register_deactivation_hook( __FILE__, 'sqm_plugin_drop_tables' );
+//register_deactivation_hook( __FILE__, 'sqm_plugin_drop_tables' );
 
 function sqm_plugin_create_tables()
 {

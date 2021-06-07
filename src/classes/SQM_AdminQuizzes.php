@@ -187,7 +187,14 @@ class SQM_AdminQuizzes
         return new WP_Error( 'sqm', implode( '', $errors ) );
     }
 
-    public static function getSanitizedField( $fieldName, $type, $allowedMarkup = [] )
+    /**
+     * Retrieve the sanitized value of the specified $_POST variable
+     * @param int|string|array $fieldName
+     * @param string $type
+     * @param array $allowedMarkup
+     * @return array|int|string
+     */
+    public static function getSanitizedField( $fieldName, string $type, array $allowedMarkup = [] )
     {
         if ( !isset( $_POST[ $fieldName ] ) ) {
             return '';
@@ -196,13 +203,41 @@ class SQM_AdminQuizzes
             return (int)$_POST[ $fieldName ];
         }
         elseif ( self::TYPE_STRING == $type ) {
-            return wp_kses( $_POST[ $fieldName ], $allowedMarkup );
+            return stripslashes( wp_kses( $_POST[ $fieldName ], $allowedMarkup ) );
         }
         elseif ( self::TYPE_ARRAY == $type ) {
             $values = [];
             foreach ( $_POST[ $fieldName ] as $key => &$value ) {
                 if ( is_string( $value ) ) {
-                    $value = wp_kses( $value, $allowedMarkup );
+                    $value = stripslashes( wp_kses( $value, $allowedMarkup ) );
+                }
+                $values[ $key ] = $value;
+            }
+            return $values;
+        }
+        return '';
+    }
+
+    /**
+     * Sanitize the specified value
+     * @param int|string|array $fieldValue
+     * @param string $type The type of the $fieldValue
+     * @param array $allowedMarkup
+     * @return array|int|string
+     */
+    public static function sanitizeField( $fieldValue, string $type, array $allowedMarkup = [] )
+    {
+        if ( self::TYPE_INT == $type ) {
+            return (int)$fieldValue;
+        }
+        elseif ( self::TYPE_STRING == $type ) {
+            return stripslashes( wp_kses( $fieldValue, $allowedMarkup ) );
+        }
+        elseif ( self::TYPE_ARRAY == $type ) {
+            $values = [];
+            foreach ( $fieldValue as $key => &$value ) {
+                if ( is_string( $value ) ) {
+                    $value = stripslashes( wp_kses( $value, $allowedMarkup ) );
                 }
                 $values[ $key ] = $value;
             }

@@ -190,6 +190,7 @@ function sqm_quiz_create_answer()
         foreach ( $answers as $index => $answer ) {
             $_points = ( $points[ $index ] ?? 0 );
             $_isCorrect = ( $correct[ $index ] ?? 0 );
+            $answer = SQM_AdminQuizzes::sanitizeField( $answer, SQM_AdminQuizzes::TYPE_STRING );
             $created = $sqmDB->answerCreate( $questionID, $answer, $_points, $_isCorrect );
             if ( !$created ) {
                 $errors[] = '<p>An error occurred and the question "' . $answer . '" could not be added.</p>';

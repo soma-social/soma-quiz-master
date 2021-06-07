@@ -71,7 +71,7 @@ if ( 'POST' == strtoupper( $_SERVER[ 'REQUEST_METHOD' ] ) ) {
 <div class="wrap sqm-wrap">
     <header>
         <h1 class="wp-heading-inline">Update Quiz</h1>
-        <a href="<?php echo esc_url( $urlCreateQuestion ); ?>" class="page-title-action">Add question</a>
+        <a href="<?php echo esc_url( $urlCreateQuestion ); ?>" class="page-title-action">Manage questions</a>
     </header>
 
     <main>

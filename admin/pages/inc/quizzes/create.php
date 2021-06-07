@@ -14,6 +14,8 @@ $title = $sqmState->get( 'title' );
 $maxAttempts = $sqmState->get( 'max_attempts' );
 $dateStart = $sqmState->get( 'date_start' );
 $dateEnd = $sqmState->get( 'date_end' );
+$messageSuccess = $sqmState->get( 'message_success' );
+$messageError = $sqmState->get( 'message_error' );
 ?>
 <div class="wrap sqm-wrap">
     <header>
@@ -42,6 +44,14 @@ $dateEnd = $sqmState->get( 'date_end' );
             <div class="form-section">
                 <label for="date_end">Date end</label>
                 <input id="date_end" name="date_end" type="text" class="widefat js-datepicker" value="<?php echo $dateEnd; ?>"/>
+            </div>
+            <div class="form-section">
+                <label for="message_success">Success message</label>
+                <textarea id="message_success" name="message_success" rows="4" class="widefat"><?php echo $messageSuccess; ?></textarea>
+            </div>
+            <div class="form-section">
+                <label for="message_error">Error message</label>
+                <textarea id="message_error" name="message_error" rows="4" class="widefat"><?php echo $messageError; ?></textarea>
             </div>
 
             <div class="form-section">

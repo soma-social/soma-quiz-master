@@ -62,6 +62,15 @@ $quizzes = $sqmDB->getQuizzes();
                             <td>
                                 <a href="<?php echo esc_url( $editUrl ); ?>">Edit</a>
                                 <span class="bar-sep">|</span>
+                                <?php
+                                $questionsPageUrl = add_query_arg( [
+                                    'page' => 'sqm_quiz_list',
+                                    SQM_AdminQuizzes::ACTION_NAME => SQM_AdminQuizzes::ACTION_CREATE_QUESTION,
+                                    'quiz_id' => $quiz->id,
+                                ], admin_url( 'admin.php' ) );
+                                ?>
+                                <a href="<?php echo esc_url( $questionsPageUrl ); ?>">Questions</a>
+                                <span class="bar-sep">|</span>
                                 <span>Delete</span>
                             </td>
                         </tr>
